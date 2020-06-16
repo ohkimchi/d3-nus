@@ -1,12 +1,11 @@
 import * as d3 from 'd3';
 import React, { useEffect, useRef, useState } from 'react';
+import {parseDate} from '../store/action'
 
 const width = 500;
 const height = 400;
 const margin = { top: 20, right: 5, bottom: 20, left: 35 };
 const red = '#eb6a5b';
-
-let parseDate = d3.timeParse("%d/%m/%y")
 
 const CategoriesReviewNumber = (props) => {
   const [svgPath, setSvgPath] = useState("")
@@ -38,7 +37,6 @@ const CategoriesReviewNumber = (props) => {
 
   return (
     <div className="SVGBlock">
-      <h5>{key}</h5>
       <svg width={width} height={height}>
         <path d={svgPath} fill='none' stroke={red} strokeWidth='2' />
         <g>
@@ -46,6 +44,7 @@ const CategoriesReviewNumber = (props) => {
           <g ref={yAxisRef} transform={`translate(${margin.left}, 0)`} />
         </g>
       </svg>
+      <h5>{key}</h5>
     </div>
 
 

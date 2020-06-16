@@ -3,7 +3,7 @@ import { max } from 'd3';
 import { csv } from 'd3-request';
 import React, { useEffect, useState } from 'react';
 import "./App.css";
-import CategoriesReviewNumber from './Components/CategoriesReviewNumber';
+import GraphWrapper from './Components/GraphWrapper';
 import { sortByDateAscending } from './store/action';
 import data from './web_application_assignment_data.csv';
 
@@ -79,40 +79,27 @@ const App = () => {
             <div>
               <h1>Categories and Review Number</h1>
               <div className="graphRow">
-                {
-                  categoriesReviewData.map((data, i) =>
-                    <CategoriesReviewNumber key={`categoriy-${i}`} data={data} numMax={numMaxCatRev} />)
-                }
+                <GraphWrapper dataArray={categoriesReviewData} numMax={numMaxCatRev} keyWord="category" />
               </div>
 
             </div>
             <div>
               <h1>Positive Reviews</h1>
               <div className="graphRow">
-                {
-                  positiveCatRev.map((data, i) =>
-                    <CategoriesReviewNumber key={`positive-${i}`} data={data} numMax={numMaxPosCatRev} />)
-                }
+                <GraphWrapper dataArray={positiveCatRev} numMax={numMaxPosCatRev} keyWord="positive" />
               </div>
             </div>
             <div>
               <h1>Negative Reviews</h1>
               <div className="graphRow">
-                {
-                  negativeCatRev.map((data, i) =>
-                    <CategoriesReviewNumber key={`negative-${i}`} data={data} numMax={numMaxNegCatRev} />
-                  )
-                }
+                <GraphWrapper dataArray={negativeCatRev} numMax={numMaxNegCatRev} keyWord="negative"/>
               </div>
 
             </div>
             <div>
               <h1>Influenced Reviews</h1>
               <div className="graphRow">
-                {
-                  influencedRev.map((data, i) =>
-                    <CategoriesReviewNumber key={`influenced-${i}`} data={data} numMax={numMaxInfluenced} />)
-                }
+                <GraphWrapper dataArray={influencedRev} numMax={numMaxInfluenced} keyWord="influenced"/>
               </div>
             </div>
           </div>)
