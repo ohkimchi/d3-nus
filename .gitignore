@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+src/web_application_assignment_data.csv
+public/web_application_assignment_data.csv
