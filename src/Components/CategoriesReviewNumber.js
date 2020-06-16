@@ -10,8 +10,9 @@ let parseDate = d3.timeParse("%d/%m/%y")
 
 const CategoriesReviewNumber = (props) => {
   const [svgPath, setSvgPath] = useState("")
-  const xAxisRef = useRef(null)
-  const yAxisRef = useRef(null)
+
+  const xAxisRef = useRef()
+  const yAxisRef = useRef()
   const { data, numMax } = props
   const { key, values } = data
 
@@ -19,7 +20,7 @@ const CategoriesReviewNumber = (props) => {
   let yScale = d3.scaleLinear().range([height - margin.bottom, margin.top])
 
   let lineGenerator = d3.line()
-  let xAxis = d3.axisBottom().scale(xScale)
+  let xAxis = d3.axisBottom().scale(xScale).tickFormat(d3.timeFormat('%b'))
   let yAxis = d3.axisLeft().scale(yScale);
 
   useEffect(() => {
