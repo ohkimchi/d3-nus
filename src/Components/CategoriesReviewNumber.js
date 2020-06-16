@@ -1,22 +1,19 @@
 import * as d3 from 'd3';
 import React, { useEffect, useRef, useState } from 'react';
 
-const width = 250;
-const height = 200;
+const width = 500;
+const height = 400;
 const margin = { top: 20, right: 5, bottom: 20, left: 35 };
 const red = '#eb6a5b';
-const blue = '#52b6ca';
 
 let parseDate = d3.timeParse("%d/%m/%y")
 
 const CategoriesReviewNumber = (props) => {
-  // console.log('props.data.key', props.data.values)
   const [svgPath, setSvgPath] = useState("")
   const xAxisRef = useRef(null)
   const yAxisRef = useRef(null)
   const { data, numMax } = props
   const { key, values } = data
-  console.log(values, numMax)
 
   let xScale = d3.scaleTime().range([margin.left, width - margin.right])
   let yScale = d3.scaleLinear().range([height - margin.bottom, margin.top])
@@ -27,7 +24,6 @@ const CategoriesReviewNumber = (props) => {
 
   useEffect(() => {
     const timeDomain = d3.extent(values, d => parseDate(d.key));
-    // const numMax = d3.max(values, d => d.value);
     xScale.domain(timeDomain);
     yScale.domain([0, numMax]);
     lineGenerator.x(d => xScale(parseDate(d.key)));
@@ -40,14 +36,17 @@ const CategoriesReviewNumber = (props) => {
   }, [numMax])
 
   return (
-    <svg width={width} height={height}>
-      <path d={svgPath} fill='none' stroke={red} strokeWidth='2' />
-      <g>
-        <g ref={xAxisRef} transform={`translate(0, ${height - margin.bottom})`} />
-        <g ref={yAxisRef} transform={`translate(${margin.left}, 0)`} />
-      </g>
-      <text>{key}</text>
-    </svg>
+    <div className="SVGBlock">
+      <h5>{key}</h5>
+      <svg width={width} height={height}>
+        <path d={svgPath} fill='none' stroke={red} strokeWidth='2' />
+        <g>
+          <g ref={xAxisRef} transform={`translate(0, ${height - margin.bottom})`} />
+          <g ref={yAxisRef} transform={`translate(${margin.left}, 0)`} />
+        </g>
+      </svg>
+    </div>
+
 
   )
 }
