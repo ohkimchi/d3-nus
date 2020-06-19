@@ -2,10 +2,12 @@ import * as d3 from 'd3';
 import { max } from 'd3';
 import { csv } from 'd3-request';
 import React, { useEffect, useState } from 'react';
+import Clock from 'react-live-clock';
 import "./App.css";
 import GraphWrapper from './Components/GraphWrapper';
 import { sortByDateAscending } from './store/action';
 import data from './web_application_assignment_data.csv';
+import ReactStopwatch from 'react-stopwatch'
 
 const App = () => {
   // const [categories, setCategories] = useState([])
@@ -21,13 +23,6 @@ const App = () => {
   useEffect(() => {
     csv(data, (err, data) => {
       if (err) throw err
-
-      // let allCategories = d3.nest()
-      //   .key(d => d.category).sortKeys(d3.ascending)
-      //   .entries(data)
-      // let allCategoryKeys = allCategories.map(d => d.key)
-      // console.log("allCategories", allCategoryKeys)
-      // setCategories(allCategoryKeys)
 
       let allCategoriesAndReviewDate = d3.nest()
         .key(d => d.category).sortKeys(d3.ascending)
@@ -105,6 +100,25 @@ const App = () => {
           </div>)
           : (<div>
             <h1>Loading Data from CSV...</h1>
+            <ReactStopwatch
+              seconds={0}
+              minutes={0}
+              hours={0}
+              limit="00:00:10"
+              onChange={({ hours, minutes, seconds }) => {
+                // do something
+              }}
+              onCallback={() => console.log('Finish')}
+              render={({ formatted, hours, minutes, seconds }) => {
+                return (
+                  <div>
+                    <p>
+                      {seconds}
+                    </p>
+                  </div>
+                );
+              }}
+            />
           </div>)
       }
 

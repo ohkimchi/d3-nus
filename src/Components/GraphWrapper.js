@@ -5,7 +5,7 @@ const GraphWrapper = (props) => {
   const { dataArray, numMax, keyWord } = props
   return (
     dataArray.map((data, i) =>
-      <CategoriesReviewNumber key={`${keyWord}-${i}`} data={data} numMax={numMax} />)
+      <CategoriesReviewNumber key={`${keyWord}-${i}`} data={data} numMax={numMax} showOutSideBool={true} />)
   )
 }
 
