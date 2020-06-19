@@ -39,5 +39,9 @@
 
 .graphRow {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
+}
+
+.MuiDialog-paperWidthSm {
+  max-width: 1100px !important;
 }

@@ -10,6 +10,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import * as d3 from 'd3';
 import React, { useEffect, useRef, useState } from 'react';
 import { parseDate } from '../store/action';
+import SimpleCategoryInDialog from './SimpleCategoryInDialog';
 
 
 const width = 500;
@@ -51,17 +52,13 @@ const DialogContent = withStyles((theme) => ({
 }))(MuiDialogContent);
 
 const CategoriesReviewNumber = (props) => {
-  const { data, numMax, showOutSideBool } = props
+  const { data, numMax } = props
   const { key, values } = data
   const [svgPath, setSvgPath] = useState("")
   const [open, setOpen] = useState(false);
-  const [showOutSide, setShowOutside] = useState(showOutSideBool)
 
   const xAxisRef = useRef()
   const yAxisRef = useRef()
-  const xAxisRef2 = useRef()
-  const yAxisRef2 = useRef()
-
 
   let xScale = d3.scaleTime().range([margin.left, width - margin.right])
   let yScale = d3.scaleLinear().range([height - margin.bottom, margin.top])
@@ -103,21 +100,19 @@ const CategoriesReviewNumber = (props) => {
           </g>
         </svg>
 
-        {showOutSideBool &&
-          <div>
-            <h5>{key}</h5>
-            <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-              Open Zoomed Graph for {key}
-            </Button>
-          </div>
-        }
+        <div>
+          <h5>{key}</h5>
+          <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+            Open Zoomed Graph for {key}
+          </Button>
+        </div>
       </div>
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
           Trend Graph for {key}
         </DialogTitle>
         <DialogContent dividers>
-          <CategoriesReviewNumber key={`${key}-x`} data={data} numMax={numMax} showOutSideBool={false} />
+          <SimpleCategoryInDialog data={data} numMax={numMax} />
         </DialogContent>
       </Dialog>
     </div>
